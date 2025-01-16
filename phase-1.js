@@ -1,47 +1,23 @@
-function stretch() {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      console.log('done stretching')
-      resolve()
-    }, 1000)
-  })
+async function stretch() {
+  console.log('done stretching')
 }
 
-function runOnTreadmill() {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      console.log('done running on treadmill')
-      resolve()
-    }, 500)
-  })
+async function runOnTreadmill() {
+  console.log('done running on treadmill')
 }
 
-function liftWeights() {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      console.log('done lifting weights')
-      resolve()
-    }, 2000)
-  })
+async function liftWeights() {
+  console.log('done lifting weights')
 }
 
-// refactor this function to handle Promises using async/await instead of
-// .then and .catch
 async function workout() {
-  try {
-    const stretch_log = await stretch()
-    const run_log = await runOnTreadmill()
-    const lift_log = await liftWeights()
-    return 'done working out'
-  } catch (error) {
-    console.error('An error occurred during the workout:', error)
-    throw error // Rethrow the error if needed
-  }
+  const stretch_log = await stretch() // Executes stretch and logs once
+  const run_log = await runOnTreadmill() // Executes runOnTreadmill and logs once
+  const lift_log = await liftWeights() // Executes liftWeights and logs once
+  console.log('done working out')
 }
 
-workout()
-  .then((result) => console.log(result))
-  .catch((error) => console.error('Workout failed:', error))
+workout().then((result) => console.log(result))
 
 /* ============================ TEST YOUR CODE ============================
 
