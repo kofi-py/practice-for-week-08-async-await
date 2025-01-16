@@ -28,12 +28,20 @@ function liftWeights() {
 // refactor this function to handle Promises using async/await instead of
 // .then and .catch
 async function workout() {
-  const stretch_log = await stretch()
-  const run_log = await runOnTreadmill()
-  const lift_log = await liftWeights()
-  return 'done working out'
+  try {
+    const stretch_log = await stretch()
+    const run_log = await runOnTreadmill()
+    const lift_log = await liftWeights()
+    return 'done working out'
+  } catch (error) {
+    console.error('An error occurred during the workout:', error)
+    throw error // Rethrow the error if needed
+  }
 }
-workout().then((result) => console.log(result))
+
+workout()
+  .then((result) => console.log(result))
+  .catch((error) => console.error('Workout failed:', error))
 
 /* ============================ TEST YOUR CODE ============================
 
